@@ -48,9 +48,33 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
 
-const pages = ['Products', 'Pricing', 'Blog'];
+import logo from '../../assets/english teacher virtual classroom.mp4'
+
+
+const VideoLogo = (
+    <Box
+      component="video"
+      autoPlay
+      loop
+      muted
+      playsInline
+      sx={{
+        height: 100, // Ajusta el tamaño según necesites
+        borderRadius: '8px', // Opcional: por si quieres bordes redondeados
+        cursor: 'pointer',
+        pointerEvents:'none',
+        userSelect:'cursor',
+        zIndex:'1',
+        position:'absolute',
+        right:'425px',
+        top:'2px',
+        boxShadow:'2px 2px 2px 2px rgb(0,0,0, .3)'
+      }}
+    >
+      <source src={logo} type="video/mp4" />
+    </Box>)
+const pages = ['La profe', 'Mis alumnos', 'Patio de juegos'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function PublicLayout() {
@@ -73,17 +97,27 @@ function PublicLayout() {
   };
 
   return (
-    <AppBar position="static">
+    <AppBar position="sticky">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+ <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+            {pages.map((page) => (
+              <Button
+                key={page}
+                onClick={handleCloseNavMenu}
+                sx={{ mt: 4, color: 'white', display: 'block', }}
+              >
+                {page}
+              </Button>
+            ))}
+          </Box>
           <Typography
             variant="h6"
             noWrap
             component="a"
             href="#app-bar-with-responsive-menu"
             sx={{
-              mr: 2,
+              mx:24,
               display: { xs: 'none', md: 'flex' },
               fontFamily: 'monospace',
               fontWeight: 700,
@@ -92,8 +126,7 @@ function PublicLayout() {
               textDecoration: 'none',
             }}
           >
-          <img src="asd" alt="asd" />
-
+          {VideoLogo}
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -131,7 +164,6 @@ function PublicLayout() {
               ))}
             </Menu>
           </Box>
-          <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
           <Typography
             variant="h5"
             noWrap
@@ -148,19 +180,9 @@ function PublicLayout() {
               textDecoration: 'none',
             }}
           >
-            LOGO
+            {VideoLogo}
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              >
-                {page}
-              </Button>
-            ))}
-          </Box>
+         
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
